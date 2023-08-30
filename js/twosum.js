@@ -17,3 +17,29 @@ var twoSum = function(nums, target) {
 }
 
 console.log(twoSum([3,2,4], 6))
+
+// Other examples:
+
+var twoSumEx1 = function(nums, target) {
+    const numToIndex = {}; // A map to store numbers and their indices
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (complement in numToIndex) {
+            return [numToIndex[complement], i];
+        }
+        numToIndex[nums[i]] = i;
+    }
+    return []; // Return an empty array if no solution is found
+};
+
+
+var twoSumsEx2 = function(nums, target) {
+    for (let i = 0, j = nums.length-1 ; i < nums.length; i++, j--){
+        if (nums[i] + nums[j] === target)  return [i, j];
+        if (nums[i] + nums[i+1] === target) return  [i, i+1];
+        if (nums[j] + nums[j-1] === target)  return [j-1, j];
+        for (let l = 0; l < nums.length; l++) {
+            if(nums[i]+nums[l]===target && i !==l) return [i, l]
+        }
+    }
+};
